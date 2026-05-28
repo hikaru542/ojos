@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ojitos Adorables</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f2f2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* Cabeza */
+.face{
+    width:180px;
+    height:125px;
+    background:#2d2d2d;
+    border:5px solid #555;
+    border-radius:45px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    animation: floaty 3s ease-in-out infinite;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+/* Orejitas robot */
+.face::before,
+.face::after{
+    content:'';
+    width:22px;
+    height:35px;
+    background:#d9d9d9;
+    border-radius:50px;
+    position:absolute;
+    top:42px;
+    border:3px solid #aaa;
+}
+
+.face::before{
+    left:-14px;
+}
+
+.face::after{
+    right:-14px;
+}
+
+/* Ojos */
+.eyes{
+    display:flex;
+    gap:18px;
+    transition:transform .3s ease;
+}
+
+.eye{
+    width:28px;
+    height:42px;
+    background:#3bc9ff;
+    border-radius:50%;
+    position:relative;
+    box-shadow:0 0 12px rgba(59,201,255,.4);
+    transition:.15s;
+}
+
+/* Brillo */
+.eye::after{
+    content:'';
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:8px;
+    left:8px;
+}
+
+/* Boquita kawaii */
+.mouth{
+    width:18px;
+    height:10px;
+    border-bottom:5px solid #3bc9ff;
+    border-radius:0 0 20px 20px;
+    margin-top:12px;
+    animation: smile 4s ease-in-out infinite;
+    box-shadow:0 0 8px rgba(59,201,255,.3);
+}
+
+/* Parpadeo */
+.blink .eye{
+    height:5px;
+    border-radius:20px;
+    margin-top:18px;
+}
+
+/* Animación flotante */
+@keyframes floaty{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+/* Sonrisita leve */
+@keyframes smile{
+    0%,100%{
+        transform:scaleX(1);
+    }
+    50%{
+        transform:scaleX(1.1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="face">
+    
+    <div class="eyes" id="eyes">
+        <div class="eye"></div>
+        <div class="eye"></div>
+    </div>
+
+    <div class="mouth"></div>
+
+</div>
+
+<script>
+const eyes = document.getElementById("eyes");
+
+// Parpadear suave
+function blink(){
+    eyes.classList.add("blink");
+
+    setTimeout(()=>{
+        eyes.classList.remove("blink");
+    },180);
+}
+
+// Mirar alrededor suave
+function moveEyes(){
+    const x = Math.floor(Math.random()*8)-4;
+    const y = Math.floor(Math.random()*6)-3;
+
+    eyes.style.transform =
+    `translate(${x}px, ${y}px)`;
+}
+
+setInterval(blink, 3200);
+setInterval(moveEyes, 2200);
+</script>
+
+</body>
+</html>
